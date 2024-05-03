@@ -1,5 +1,5 @@
 name: Digger Workflow
-'on':
+on:
   workflow_dispatch:
     inputs:
       id:
