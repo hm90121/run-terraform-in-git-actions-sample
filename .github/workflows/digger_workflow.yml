@@ -1,5 +1,4 @@
 name: Digger Workflow
-
 on: 
   workflow_dispatch:
    inputs:
