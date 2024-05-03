@@ -19,3 +19,4 @@ resource "aws_instance" "web" {
         Name = "hello-world"
     } 
 }
+///add comments to code
