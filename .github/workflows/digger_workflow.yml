@@ -1,34 +1,40 @@
 name: Digger Workflow
+
 on:
   workflow_dispatch:
     inputs:
       id:
-        description: run identifier
+        description: Run identifier
         required: false
       job:
+        description: Job identifier
         required: true
       comment_id:
+        description: Comment identifier
         required: true
-      jobs: null
-      digger-job: null
-      runs-on: ubuntu-latest
-      permissions: null
+
+jobs:
+  digger-job:
+    runs-on: ubuntu-latest
+    permissions:
       contents: write
       actions: write
       id-token: write
       pull-requests: write
       statuses: write
-  steps:
-    - uses: actions/checkout@v4
-    - uses: diggerhq/digger@v0.4.13
-      with:
-        setup-aws: true
-        aws-access-key-id: '${{ secrets.AWS_ACCESS_KEY_ID }}'
-        aws-secret-access-key: '${{ secrets.AWS_SECRET_ACCESS_KEY }}'
-        disable-locking: true
-        digger-hostname: 'https://cloud.digger.dev'
-        digger-organisation: digger
-        digger-token: '${{ secrets.DIGGER_TOKEN }}'
-      env:
-        GITHUB_CONTEXT: '${{ toJson(github) }}'
-        GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: diggerhq/digger@v0.4.13
+        with:
+          setup-aws: true
+          aws-access-key-id: '${{ secrets.AWS_ACCESS_KEY_ID }}'
+          aws-secret-access-key: '${{ secrets.AWS_SECRET_ACCESS_KEY }}'
+          disable-locking: true
+          digger-hostname: 'https://cloud.digger.dev'
+          digger-organisation: digger
+          digger-token: '${{ secrets.DIGGER_TOKEN }}'
+        env:
+          GITHUB_CONTEXT: '${{ toJson(github) }}'
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+
