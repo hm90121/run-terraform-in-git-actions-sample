@@ -20,3 +20,4 @@ resource "aws_instance" "web" {
     } 
 }
 //add comments to terraform 
+//check digger bot 
