@@ -1,0 +1,32 @@
+name: Terraform CI/CD
+
+on:
+  # Triggers the workflow on pushes and pull requests to the main branch
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest  # You can also use other operating systems, like Windows or macOS
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3  # Check out your repository to get the Terraform files
+
+      - name: Set Up Terraform
+        uses: hashicorp/setup-terraform@v2  # This step installs Terraform
+        with:
+          terraform_version: '1.5.0'  # Specify the Terraform version you want to use
+      
+      - name: Initialize Terraform
+        run: terraform init  # Initializes the Terraform working directory
+
+      - name: Validate Terraform
+        run: terraform validate  # Validates your Terraform configuration files
+      
+      - name: Apply Terraform (Dry Run)
+        run: terraform plan -out=tfplan
